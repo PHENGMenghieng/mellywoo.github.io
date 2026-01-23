@@ -1,0 +1,187 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>YAYYYY</title>
+  <style>
+    body {
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: Arial, sans-serif;
+      background: #fff0f8;
+    }
+
+    .box {
+      text-align: center;
+    }
+
+    input {
+      padding: 10px;
+      font-size: 16px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      margin-top: 10px;
+    }
+
+    button {
+      margin-top: 15px;
+      padding: 10px 20px;
+      font-size: 16px;
+      border: none;
+      border-radius: 6px;
+      background: #ff69b4;
+      color: white;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="box">
+    <h1>YAYYYYY 🥳💖</h1>
+    <p>Drop your ML ID so I can add you 👀</p>
+
+    <input type="text" placeholder="ML ID + Server" />
+    <br>
+    <button>Send ✨</button>
+  </div>
+
+</body>
+</html> -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>YAYYYY</title>
+
+  <style>
+    body {
+      height: 100vh;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: "Comic Sans MS", "Poppins", cursive;
+      background: linear-gradient(135deg, #ffeaf4, #ffd6e8);
+      overflow: hidden;
+    }
+
+    .box {
+      background: white;
+      padding: 45px 55px;
+      border-radius: 30px;
+      text-align: center;
+      box-shadow: 0 25px 45px rgba(255, 105, 180, 0.3);
+      animation: floatIn 0.9s ease;
+      z-index: 2;
+    }
+
+    h1 {
+      font-size: 32px;
+      color: #ff5fa2;
+      margin-bottom: 10px;
+    }
+
+    p {
+      color: #777;
+      margin-bottom: 25px;
+    }
+
+    input {
+      width: 100%;
+      padding: 14px;
+      font-size: 16px;
+      border-radius: 999px;
+      border: 2px solid #ffd1e6;
+      outline: none;
+      text-align: center;
+    }
+
+    button {
+      margin-top: 20px;
+      padding: 14px 40px;
+      font-size: 17px;
+      border: none;
+      border-radius: 999px;
+      background: linear-gradient(135deg, #ff85c2, #ff5fa2);
+      color: white;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    button:hover {
+      transform: scale(1.08);
+      box-shadow: 0 10px 25px rgba(255, 95, 162, 0.4);
+    }
+
+    .hearts {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+      z-index: 1;
+    }
+
+    .heart {
+      position: absolute;
+      bottom: -20px;
+      animation: floatUp linear forwards;
+      opacity: 0.8;
+    }
+
+    @keyframes floatUp {
+      to {
+        transform: translateY(-120vh) scale(1.5);
+        opacity: 0;
+      }
+    }
+
+    @keyframes floatIn {
+      from {
+        transform: translateY(30px);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="box">
+    <h1>YAYYYYY 🥳💖</h1>
+    <p>Drop your ML ID so I can add you 👀</p>
+    <input type="text" placeholder="ML ID + Server">
+    <br>
+    <button>Send ✨</button>
+  </div>
+
+  <div class="hearts"></div>
+
+  <script>
+    const heartsContainer = document.querySelector(".hearts");
+    const heartEmojis = ["💖", "💗", "💕", "💘", "💝"];
+
+    function createHeart() {
+      const heart = document.createElement("div");
+      heart.className = "heart";
+      heart.innerText = heartEmojis[Math.floor(Math.random() * heartEmojis.length)];
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.fontSize = (16 + Math.random() * 20) + "px";
+      heart.style.animationDuration = (4 + Math.random() * 3) + "s";
+      heartsContainer.appendChild(heart);
+      setTimeout(() => heart.remove(), 7000);
+    }
+
+    setInterval(createHeart, 400);
+  </script>
+
+</body>
+</html>
