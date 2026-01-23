@@ -1,63 +1,8 @@
-<!-- <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>YAYYYY</title>
-  <style>
-    body {
-      height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-family: Arial, sans-serif;
-      background: #fff0f8;
-    }
-
-    .box {
-      text-align: center;
-    }
-
-    input {
-      padding: 10px;
-      font-size: 16px;
-      border-radius: 6px;
-      border: 1px solid #ccc;
-      margin-top: 10px;
-    }
-
-    button {
-      margin-top: 15px;
-      padding: 10px 20px;
-      font-size: 16px;
-      border: none;
-      border-radius: 6px;
-      background: #ff69b4;
-      color: white;
-      cursor: pointer;
-    }
-  </style>
-</head>
-<body>
-
-  <div class="box">
-    <h1>YAYYYYY 🥳💖</h1>
-    <p>Drop your ML ID so I can add you 👀</p>
-
-    <input type="text" placeholder="ML ID + Server" />
-    <br>
-    <button>Send ✨</button>
-  </div>
-
-</body>
-</html> -->
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <title>YAYYYY</title>
-
   <style>
     body {
       height: 100vh;
@@ -114,7 +59,7 @@
     }
 
     button:hover {
-      transform: scale(1.08);
+      transform: scale(1.15);
       box-shadow: 0 10px 25px rgba(255, 95, 162, 0.4);
     }
 
@@ -152,15 +97,21 @@
     }
   </style>
 </head>
-
 <body>
 
   <div class="box">
     <h1>YAYYYYY 🥳💖</h1>
     <p>Drop your ML ID so I can add you 👀</p>
-    <input type="text" placeholder="ML ID + Server">
-    <br>
-    <button>Send ✨</button>
+
+    <form id="mlForm">
+      <input type="text" name="entry.XXXXXXXXXX" placeholder="ML ID + Server" required>
+      <br>
+      <button type="submit">Send ✨</button>
+    </form>
+
+    <p id="thankYou" style="display:none; color:#ff5fa2; font-weight:bold; margin-top:10px;">
+      Thanks! 🎉 I got your ML ID!
+    </p>
   </div>
 
   <div class="hearts"></div>
@@ -169,6 +120,7 @@
     const heartsContainer = document.querySelector(".hearts");
     const heartEmojis = ["💖", "💗", "💕", "💘", "💝"];
 
+    // Floating hearts
     function createHeart() {
       const heart = document.createElement("div");
       heart.className = "heart";
@@ -179,8 +131,26 @@
       heartsContainer.appendChild(heart);
       setTimeout(() => heart.remove(), 7000);
     }
-
     setInterval(createHeart, 400);
+
+    // Google Sheet submission
+    const form = document.getElementById("mlForm");
+    const thankYou = document.getElementById("thankYou");
+    const GOOGLE_FORM_URL = "https://docs.google.com/forms/d/e/1FAIpQLSeSKggUX8iBN8CEUB2EPLnbtj0ysKTgW6_WEhJoeJYKixdT3Q/viewform?usp=publish-editor"; // 
+
+    form.addEventListener("submit", function(e){
+      e.preventDefault();
+      const formData = new FormData(form);
+      fetch(GOOGLE_FORM_URL, { method:"POST", mode:"no-cors", body: formData })
+        .then(() => {
+          thankYou.style.display = "block";
+          form.reset();
+        })
+        .catch((err) => {
+          alert("Oops! Something went wrong. Try again.");
+          console.error(err);
+        });
+    });
   </script>
 
 </body>

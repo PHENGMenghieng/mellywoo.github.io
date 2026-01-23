@@ -1,81 +1,8 @@
-<!-- <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Will you be my friend?</title>
-  <style>
-    body {
-      height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-family: Arial, sans-serif;
-      background: #ffeef5;
-    }
-
-    .box {
-      text-align: center;
-    }
-
-    button {
-      padding: 12px 25px;
-      font-size: 18px;
-      margin: 10px;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-    }
-
-    #yes {
-      background: #ff69b4;
-      color: white;
-    }
-
-    #no {
-      background: #ccc;
-      position: absolute;
-    }
-  </style>
-</head>
-<body>
-
-  <div class="box">
-    <h1>Will you be my friend? 🥺</h1>
-    <button id="yes" onclick="goYes()">Yes 💖</button>
-    <button id="no">No 😭</button>
-  </div>
-
-  <script>
-    const noBtn = document.getElementById("no");
-
-    function moveButton() {
-      const x = Math.random() * (window.innerWidth - 100);
-      const y = Math.random() * (window.innerHeight - 50);
-      noBtn.style.left = x + "px";
-      noBtn.style.top = y + "px";
-    }
-
-    // PC (hover)
-    noBtn.addEventListener("mouseover", moveButton);
-
-    // Phone (tap)
-    noBtn.addEventListener("touchstart", moveButton);
-
-    function goYes() {
-      window.location.href = "yes.html";
-    }
-  </script>
-
-</body>
-</html> -->
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <title>Will you be my friend?</title>
-
   <style>
     body {
       height: 100vh;
@@ -121,12 +48,17 @@
     #yes {
       background: linear-gradient(135deg, #ff85c2, #ff5fa2);
       color: white;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    #yes:hover {
+      transform: scale(1.15); /* pop effect */
     }
 
     #no {
       background: #f1f1f1;
       color: #999;
-      position: absolute;
+      position: fixed;
+      z-index: 9999;
       transition: transform 0.2s ease;
     }
 
@@ -142,7 +74,6 @@
     .heart {
       position: absolute;
       bottom: -20px;
-      font-size: 20px;
       animation: floatUp linear forwards;
       opacity: 0.8;
     }
@@ -181,12 +112,11 @@
     }
   </style>
 </head>
-
 <body>
 
   <div class="box">
     <h1>Will you be my friend? 🥺</h1>
-    <button id="yes">Yes 💖</button>
+    <button id="yes" onclick="window.location.href='yes.html'">Yes 💖</button>
     <button id="no">No 😭</button>
   </div>
 
@@ -194,7 +124,6 @@
 
   <script>
     const noBtn = document.getElementById("no");
-    const yesBtn = document.getElementById("yes");
     const heartsContainer = document.querySelector(".hearts");
 
     let noScale = 1;
@@ -213,7 +142,7 @@
     }
     setInterval(createHeart, 400);
 
-    // Move No button
+    // No button movement
     function moveButton() {
       const x = Math.random() * (window.innerWidth - 100);
       const y = Math.random() * (window.innerHeight - 50);
@@ -221,14 +150,12 @@
       noBtn.style.top = y + "px";
     }
 
-    // Shrink No
     function shrinkNo() {
       noScale -= 0.08;
       if (noScale < 0.25) noScale = 0.25;
-      noBtn.style.transform = scale(${noScale});
+      noBtn.style.transform = `scale(${noScale})`;
     }
 
-    // Broken hearts
     function spawnBrokenHearts() {
       for (let i = 0; i < 5; i++) {
         const heart = document.createElement("div");
@@ -240,50 +167,18 @@
         document.body.appendChild(heart);
         setTimeout(() => heart.remove(), 1000);
       }
-    }
-
-    function noInteraction() {
+    }function noInteraction() {
       moveButton();
       shrinkNo();
       spawnBrokenHearts();
     }
 
     noBtn.addEventListener("mouseover", noInteraction);
-    noBtn.addEventListener("touchstart", noInteraction);
-
-    yesBtn.addEventListener("click", () => {
-      window.location.href = "yes.html";
+    noBtn.addEventListener("touchstart", (e) => {
+      e.preventDefault();
+      noInteraction();
     });
   </script>
 
 </body>
-<!-- </html>(scale(${noScale})`;
-    }
-
-    // Broken hearts
-    function spawnBrokenHearts() {
-      for (let i = 0; i < 5; i++) {
-        const heart = document.createElement("div");
-        heart.className = "broken-heart";
-        heart.innerText = "💔";
-        const rect = noBtn.getBoundingClientRect();
-        heart.style.left = rect.left + Math.random() * rect.width + "px";
-        heart.style.top = rect.top + "px";
-        document.body.appendChild(heart);
-        setTimeout(() => heart.remove(), 1000);
-      }
-    }
-
-    function noInteraction() {
-      moveButton();
-      shrinkNo();
-      spawnBrokenHearts();
-    }
-
-    noBtn.addEventListener("mouseover", noInteraction);
-    noBtn.addEventListener("touchstart", noInteraction);
-
-    yesBtn.addEventListener("click", () => {
-      window.location.href = "yes.html";
-    });
-  </script> -->
+</html>
